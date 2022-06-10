@@ -31,7 +31,11 @@ export default function ChatScreen({ navigation }) {
     const unsubscribe = db
       .orderBy("createdAt", "desc")
       .onSnapshot((collectionSnapshot) => {
-        const messages = collectionSnapshot.docs.map((doc) => doc.data());
+        const messages = collectionSnapshot.docs.map((doc) => {
+          const date = doc.data().createdAt.toDate();
+          const newDoc = { ...doc.data(), createdAt: date };
+          return newDoc;
+        });
         setMessages(messages);
       });
     return unsubscribe;
