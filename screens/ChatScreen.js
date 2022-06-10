@@ -42,6 +42,11 @@ export default function ChatScreen({ navigation }) {
 
   const logout = () => auth.signOut();
 
+  function sendMessages(newMessages) {
+    console.log(newMessages);
+    setMessages([...messages, ...newMessages]);
+  }
+
   return (
     <GiftedChat
       messages={messages}
