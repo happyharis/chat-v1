@@ -7,10 +7,25 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import firebase from "../database/firebaseDB";
+
+const auth = firebase.auth();
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  function login() {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navigation.navigate("Chat");
+      })
+      .catch((error) => {
+        console.log("Error");
+      });
+  }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -31,7 +46,7 @@ export default function LoginScreen({ navigation }) {
           onChangeText={(text) => setPassword(text)}
         />
 
-        <TouchableOpacity style={styles.loginButton} onPress={null}>
+        <TouchableOpacity style={styles.loginButton} onPress={login}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
