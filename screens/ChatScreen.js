@@ -7,16 +7,7 @@ import firebase from "../database/firebaseDB";
 
 const auth = firebase.auth();
 
-const demoMessage = {
-  _id: 1,
-  text: "Hello, I am a demo message",
-  createdAt: new Date(),
-  user: {
-    _id: 2,
-    name: "React Native",
-    avatar: "https://placeimg.com/140/140/any",
-  },
-};
+const db = firebase.firestore().collection("messages");
 
 export default function ChatScreen({ navigation }) {
   const [messages, setMessages] = useState([]);
@@ -37,7 +28,13 @@ export default function ChatScreen({ navigation }) {
       ),
     });
 
-    setMessages([demoMessage]);
+    const unsubscribe = db
+      .orderBy("createdAt", "desc")
+      .onSnapshot((collectionSnapshot) => {
+        const messages = collectionSnapshot.docs.map((doc) => doc.data());
+        setMessages(messages);
+      });
+    return unsubscribe;
   }, []);
 
   const logout = () => auth.signOut();
