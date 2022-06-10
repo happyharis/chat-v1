@@ -41,7 +41,7 @@ export default function ChatScreen({ navigation }) {
 
   function sendMessages(newMessages) {
     console.log(newMessages);
-    setMessages([...messages, ...newMessages]);
+    db.add(newMessages[0]);
   }
 
   return (
