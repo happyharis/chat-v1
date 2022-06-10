@@ -53,7 +53,7 @@ export default function ChatScreen({ navigation }) {
       messages={messages}
       onSend={sendMessages}
       listViewProps={{ style: { backgroundColor: "#666" } }}
-      user={{ _id: 1 }}
+      user={{ _id: auth.currentUser?.uid, name: auth.currentUser?.email }}
     />
   );
 }
