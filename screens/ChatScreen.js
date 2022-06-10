@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { GiftedChat } from "react-native-gifted-chat";
 
 import firebase from "../database/firebaseDB";
 
@@ -42,9 +43,12 @@ export default function ChatScreen({ navigation }) {
   const logout = () => auth.signOut();
 
   return (
-    <View>
-      <Text>ChatScreen</Text>
-    </View>
+    <GiftedChat
+      messages={messages}
+      onSend={(newMessages) => onSend(newMessages)}
+      listViewProps={{ style: { backgroundColor: "#666" } }}
+      user={{ _id: 1 }}
+    />
   );
 }
 
