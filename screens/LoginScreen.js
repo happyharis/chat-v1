@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import React, { useState } from "react";
@@ -22,7 +21,7 @@ export default function LoginScreen({ navigation }) {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        navigation.navigate("Chat");
+        console.log("Signed in!");
       })
       .catch((error) => {
         console.log("Error");
