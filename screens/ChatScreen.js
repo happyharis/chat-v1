@@ -1,5 +1,6 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useEffect } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import firebase from "../database/firebaseDB";
 
@@ -14,14 +15,20 @@ export default function ChatScreen({ navigation }) {
         navigation.navigate("Login");
       }
     });
-    return () => {};
+
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={logout}>
+          <MaterialCommunityIcons name="logout" size={30} color="grey" />
+        </TouchableOpacity>
+      ),
+    });
   }, []);
 
   const logout = () => auth.signOut();
 
   return (
     <View>
-      <Button onPress={logout} title="Log out"></Button>
       <Text>ChatScreen</Text>
     </View>
   );
