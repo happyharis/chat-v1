@@ -47,7 +47,7 @@ export default function ChatScreen({ navigation }) {
   return (
     <GiftedChat
       messages={messages}
-      onSend={(newMessages) => onSend(newMessages)}
+      onSend={sendMessages}
       listViewProps={{ style: { backgroundColor: "#666" } }}
       user={{ _id: 1 }}
     />
