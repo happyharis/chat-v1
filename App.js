@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator mode="modal">
+      <Stack.Navigator screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen
           name="Login"
